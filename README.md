@@ -32,6 +32,16 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1   # Windows
 | `long-task-monitor` | รันงานนานใน background พร้อม heartbeat |
 | `wsl-podman-troubleshoot` | แก้ปัญหา WSL/podman บนเครื่องบริษัท และคืนพื้นที่ C: |
 | `thai-lease-contract` | ร่างสัญญาเช่าภาษาไทยเป็นไฟล์ Word ตามรูปแบบหนังสือราชการ |
+| `coding-guidelines` | กฎพื้นฐานทุกงานโค้ด: คิดก่อนเขียน, ง่ายไว้ก่อน, แก้เฉพาะจุด, มีเป้าที่ตรวจได้ |
+| `implementation-plan` | ทำความเข้าใจโจทย์ → เขียนแผนทีละ step → ทำทีละ step พร้อม verify |
+| `code-review-checklist` | review PR (ถูกต้อง, security, breaking change, performance, test) และการตอบ review |
+| `api-design` | ออกแบบ REST/event contract: status code, error format, pagination, idempotency, versioning |
+| `database-migration` | migration ที่ไม่ทำให้ระบบหยุด (expand/contract), lock, backfill, rollback |
+| `secure-coding` | OWASP: injection, authz/IDOR, SSRF, path traversal, secret/PII |
+| `observability` | log/metric/trace/alert (histogram สำหรับ p95, traceId, SLO) |
+| `performance-tuning` | วัดก่อนแก้: EXPLAIN, profiler, pool, cache, N+1 |
+| `dockerfile-best-practices` | Dockerfile/compose: multi-stage, non-root, cache layer, healthcheck |
+| `pr-description` | เขียน title และ body ของ PR (What/Why/How to test/Risk) |
 
 ## Skills ยอดนิยมจากภายนอก (แนะนำให้ติดตั้งเพิ่ม)
 
@@ -48,6 +58,13 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1   # Windows
 /plugin marketplace add obra/superpowers-marketplace
 /plugin install superpowers@superpowers-marketplace
 ```
+
+Superpowers ติดตั้งจาก official marketplace ได้ด้วย: `/plugin install superpowers@claude-plugins-official`
+
+ตัวอื่นที่คนแนะนำบ่อย (ให้ดูความเคลื่อนไหวของ repo ก่อนติดตั้ง):
+- `frontend-design` และ `webapp-testing` (Playwright) จาก `example-skills` ของ Anthropic
+- [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills): รวม skill เชื่อมกับ Jira, Linear, Slack, GitHub
+- Karpathy-style coding guidelines (ชุดนี้มี `coding-guidelines` ที่สรุปแนวคิดเดียวกันไว้แล้ว)
 
 - ถ้าใช้บัญชี claude.ai ตัวเดียวกัน skill ของ Anthropic (docx/pdf/pptx/xlsx/skill-creator) จะ sync มาให้อัตโนมัติ
 - คำสั่งที่มากับ Claude Code อยู่แล้ว: `/code-review`, `/security-review`, `/simplify`, `/init`
