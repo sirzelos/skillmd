@@ -1,0 +1,75 @@
+{
+  "_comment": "Schema + recommended defaults for contract-template.md. Values marked SAMPLE are fictitious. Missing keys render as dotted blanks and are listed as warnings.",
+  "_with": ["advance"],
+
+  "contract_no": "01/2569",
+  "made_at": "บ้านเลขที่ 99/1 หมู่บ้านตัวอย่าง (SAMPLE)",
+  "sign_date": "2026-10-25",
+
+  "lessor": {
+    "name": "นางสมศรี ตัวอย่าง (SAMPLE)", "age": 60, "nationality": "ไทย",
+    "id_no": "1-2345-67890-12-3", "address": "1 ถนนตัวอย่าง แขวง… เขต… กรุงเทพมหานคร 10000",
+    "phone": "081-234-5678", "line": "somsri", "email": "-"
+  },
+  "lessor_rep": { "name": "", "id_no": "", "poa_date": "2026-10-20" },
+
+  "lessee": {
+    "name": "นายสมชาย ผู้เช่า (SAMPLE)", "age": 35, "nationality": "ไทย",
+    "id_type": "เลขประจำตัวประชาชน", "id_no": "3-2100-00000-00-0",
+    "address": "2 ถนนตัวอย่าง ตำบล… อำเภอ… จังหวัด…",
+    "phone": "089-000-0000", "line": "somchai", "email": "somchai@example.com",
+    "company_name": "", "company_reg_no": ""
+  },
+  "guarantor": { "name": "", "age": "", "id_no": "", "address": "", "limit": 50000 },
+
+  "property": {
+    "type": "บ้านเดี่ยวสองชั้น 3 ห้องนอน 2 ห้องน้ำ",
+    "address": "99/1 หมู่ที่ 5 หมู่บ้านตัวอย่าง ซอย… ถนน… ตำบล… อำเภอ… จังหวัด… (SAMPLE)",
+    "short": "99/1",
+    "deed_no": "12345", "land_no": "678", "survey_page": "910",
+    "deed_subdistrict": "…", "deed_district": "…", "deed_province": "…",
+    "area": "0 ไร่ 0 งาน 60 ตารางวา",
+    "mortgagee": "ธนาคาร…"
+  },
+  "max_occupants": 4,
+  "occupants": "ผู้เช่า และ…",
+
+  "term_text": "1 ปี",
+  "start_date": "2026-11-01",
+  "end_date": "2027-10-31",
+  "handover_date": "2026-11-01",
+
+  "rent": 15000,
+  "rent_includes": null,
+  "rent_due_day": 5,
+  "bank": { "name": "…", "branch": "…", "account_name": "…", "account_no": "xxx-x-xxxxx-x" },
+  "late_fee_per_day": 100,
+  "late_fee_cap": 1500,
+
+  "deposit": 30000, "deposit_months": 2, "deposit_refund_days": 7,
+  "advance": 15000, "advance_months": 1, "advance_applies_to": "เดือนสุดท้ายของการเช่า",
+
+  "meter": { "electric_no": "…", "water_no": "…", "owner_name": "ผู้ให้เช่า" },
+  "common_fee": "…บาทต่อปี", "common_fee_payer": "ผู้เช่า",
+  "stamp_duty": 180, "stamp_duty_payer": "ผู้ให้เช่าเป็นผู้ออก",
+  "parking_cars": 2, "inspect_frequency": "ได้ไม่เกินเดือนละ 1 ครั้ง", "cctv_cameras": 4,
+
+  "repair_days": 7, "minor_repair_limit": 1000,
+  "ac_cleaning_months": 6, "ac_cleaning_payer": "ผู้เช่า",
+  "entry_notice_hours": 24, "showing_days": 30,
+  "pets_allowed": "สุนัขหรือแมวไม่เกิน 2 ตัว",
+  "movename_days": 30,
+  "renew_notice_days": 30, "renew_term": "1 ปี", "renew_rent": 15750,
+  "early_notice_days": 30, "early_min_period": "6 เดือน", "early_forfeit": 15000,
+  "lessor_early_notice_days": 60, "_note_lessor_early_comp": "used only with _with lessor_early_comp", "lessor_early_comp": 15000,
+  "holdover_per_day": 1000,
+
+  "inventory_rows": ["| 1 | กุญแจประตูหน้าบ้าน | | | | |", "| 2 | กุญแจประตูหลังบ้าน | | | | |", "| 3 | กุญแจประตูรั้ว / รีโมทประตู | | | | |", "| 4 | กุญแจห้องนอน | | | | |", "| 5 | เครื่องปรับอากาศ | | | | |", "| 6 | เครื่องทำน้ำอุ่น | | | | |", "| 7 | ปั๊มน้ำ / ถังเก็บน้ำ | | | | |", "| 8 | ผ้าม่าน / มู่ลี่ | | | | |", "| 9 | ชุดเครื่องครัว / เตา / เครื่องดูดควัน | | | | |", "| 10 | เฟอร์นิเจอร์ (ระบุ) | | | | |", "| 11 | | | | | |", "| 12 | | | | | |"],
+
+  "shortfall_days": 15, "rent_default_notice_days": 15, "vacate_days": 15,
+  "transfer_notice_days": 30, "death_stay_days": 30,
+  "late_terminate_days": 30, "urgent_repair_cap": 3000, "cleaning_fee": 2000,
+  "land": { "owner": "วัด…", "lease_ref": " เลขที่ … ลงวันที่ …" },
+
+  "witness1": "", "witness2": ""
+}
