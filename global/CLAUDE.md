@@ -16,6 +16,8 @@
 
 ## โค้ด
 - comment ไม่เกิน 1-2 บรรทัด
+- debug: หา root cause ก่อนแก้ ห้าม skip/xfail test และห้ามเติม retry/sleep เพื่อกลบอาการ ถ้าลองไป 3 สมมติฐานแล้วยังไม่เจอ ให้หยุดและสรุปให้ผู้ใช้
+- test ลบเฉพาะข้อมูลที่ตัวเองสร้าง (ห้าม `DELETE FROM table` แบบไม่จำกัด scope)
 - ก่อนบอกว่าเสร็จ ให้รัน test suite ทั้งชุดเทียบ baseline ของ base branch (skill `full-verify`)
 
 ## การรอ / ค่าใช้จ่าย

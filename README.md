@@ -14,7 +14,7 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1   # Windows
 ./install.sh   # macOS / Linux / WSL / Git Bash
 ```
 
-สคริปต์จะ copy `skills/*` ไปที่ `~/.claude/skills/` และ copy `global/CLAUDE.md` ไปที่ `~/.claude/CLAUDE.md` ถ้ามีของเดิมอยู่จะสำรองเป็น `*.bak-<เวลา>` ก่อน และจะรัน `npm install` ให้ skill สัญญาเช่า จากนั้นให้ restart Claude Code
+สคริปต์จะ copy `skills/*` และ `vendor/*/*` ไปที่ `~/.claude/skills/` และ copy `global/CLAUDE.md` ไปที่ `~/.claude/CLAUDE.md` ถ้ามีของเดิมอยู่จะสำรองเป็น `*.bak-<เวลา>` ก่อน และจะรัน `npm install` ให้ skill สัญญาเช่า จากนั้นให้ restart Claude Code
 
 ## Skills ในชุดนี้
 
@@ -23,8 +23,6 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1   # Windows
 | `python-clean-code` | ตรวจและเก็บกวาดโค้ด Python (PEP 8, black, isort, flake8, mypy, pytest) |
 | `java-spring-clean-code` | review โค้ด Java/Spring Boot/WebFlux/Kafka/Redis |
 | `full-verify` | ก่อนบอกว่าเสร็จ: test ทั้งชุดเทียบ baseline, path ที่เปลี่ยนทำงานจริง, ตรงตามสเปก |
-| `systematic-debugging` | หา root cause ก่อนแก้ bug หรือ error |
-| `test-driven-development` | เขียน test ก่อน (red → green → refactor) |
 | `git-team-workflow` | merge release, กฎแก้ conflict, กันไฟล์ local ไม่ให้ขึ้น git, ตั้งชื่อ commit |
 | `cve-fix` | แก้ CVE/SCA พร้อมหลักฐาน Trivy before/after |
 | `spec-writing` | เขียนสเปกให้ทำได้จริง, AC ทดสอบได้, ภาษาคน |
@@ -43,32 +41,29 @@ powershell -ExecutionPolicy Bypass -File .\install.ps1   # Windows
 | `dockerfile-best-practices` | Dockerfile/compose: multi-stage, non-root, cache layer, healthcheck |
 | `pr-description` | เขียน title และ body ของ PR (What/Why/How to test/Risk) |
 
-## Skills ยอดนิยมจากภายนอก (แนะนำให้ติดตั้งเพิ่ม)
+## Skills ยอดนิยมจากภายนอก (อยู่ใน `vendor/` ติดตั้งให้แล้ว)
 
-ชุดเหล่านี้มีคนดูแลอัปเดตอยู่ จึงติดตั้งจาก marketplace แทนการ copy มาเก็บไว้ ให้รันใน Claude Code:
+คัดลอกมาเฉพาะตัวที่ license อนุญาต รายละเอียดที่มาและ license อยู่ใน [vendor/README.md](vendor/README.md) อัปเดตจากต้นทางด้วย `./update-vendor.sh`
+
+| ชุด | Skills |
+|---|---|
+| **Superpowers** (obra, MIT) | `brainstorming`, `writing-plans`, `executing-plans`, `subagent-driven-development`, `dispatching-parallel-agents`, `test-driven-development`, `systematic-debugging`, `verification-before-completion`, `requesting-code-review`, `receiving-code-review`, `using-git-worktrees`, `finishing-a-development-branch`, `writing-skills`, `using-superpowers`, `diagnosing-superpowers` |
+| **Anthropic** (Apache-2.0) | `frontend-design`, `webapp-testing` (Playwright), `mcp-builder`, `claude-api`, `skill-creator`, `web-artifacts-builder`, `internal-comms`, `brand-guidelines`, `theme-factory`, `canvas-design`, `algorithmic-art`, `slack-gif-creator`, `academy-guide`, `discernment-nudge` |
+| **Karpathy guidelines** (MIT) | `karpathy-guidelines` |
+| **Composio** (Apache-2.0) | `changelog-generator` |
+
+ที่ใส่ไม่ได้เพราะ license: `docx`, `pdf`, `pptx`, `xlsx` ของ Anthropic ชุดนี้ sync มาจากบัญชี claude.ai ให้เอง หรือติดตั้งเองด้วย:
 
 ```text
-# Anthropic official: docx, xlsx, pptx, pdf, skill-creator, frontend-design, mcp-builder, ...
 /plugin marketplace add anthropics/skills
 /plugin install document-skills@anthropic-agent-skills
-/plugin install example-skills@anthropic-agent-skills
-
-# Superpowers (obra): brainstorming, writing-plans, executing-plans, TDD, systematic-debugging,
-# verification-before-completion, requesting/receiving code review, git worktrees
-/plugin marketplace add obra/superpowers-marketplace
-/plugin install superpowers@superpowers-marketplace
 ```
 
-Superpowers ติดตั้งจาก official marketplace ได้ด้วย: `/plugin install superpowers@claude-plugins-official`
+ทางเลือก: ติดตั้ง Superpowers เป็น plugin (ได้ hooks ครบและอัปเดตอัตโนมัติ) ด้วย `/plugin install superpowers@claude-plugins-official` ถ้าติดตั้งแบบนี้ ให้ลบโฟลเดอร์ skill ชื่อซ้ำใน `~/.claude/skills` ออก
 
-ตัวอื่นที่คนแนะนำบ่อย (ให้ดูความเคลื่อนไหวของ repo ก่อนติดตั้ง):
-- `frontend-design` และ `webapp-testing` (Playwright) จาก `example-skills` ของ Anthropic
-- [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills): รวม skill เชื่อมกับ Jira, Linear, Slack, GitHub
-- Karpathy-style coding guidelines (ชุดนี้มี `coding-guidelines` ที่สรุปแนวคิดเดียวกันไว้แล้ว)
-
-- ถ้าใช้บัญชี claude.ai ตัวเดียวกัน skill ของ Anthropic (docx/pdf/pptx/xlsx/skill-creator) จะ sync มาให้อัตโนมัติ
+เพิ่มเติม:
 - คำสั่งที่มากับ Claude Code อยู่แล้ว: `/code-review`, `/security-review`, `/simplify`, `/init`
-- ถ้าคำสั่ง `/plugin` ใช้ไม่ได้ ให้ดูชื่อ marketplace/plugin ล่าสุดที่ https://github.com/anthropics/skills และ https://github.com/obra/superpowers
+- [ComposioHQ/awesome-claude-skills](https://github.com/ComposioHQ/awesome-claude-skills): รวม skill เชื่อมกับ Jira, Linear, Slack, GitHub (ต้องใช้บัญชี Composio)
 
 ## เพิ่ม skill ใหม่
 สร้าง `skills/<name>/SKILL.md` ที่มี frontmatter `name` และ `description` (description บอกว่าทำอะไรและใช้เมื่อไร) แล้วรัน install ใหม่

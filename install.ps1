@@ -1,24 +1,27 @@
-# Install skills + global CLAUDE.md into ~/.claude (Windows PowerShell)
+# Install skills + vendor skills + global CLAUDE.md into ~/.claude (Windows PowerShell)
 $ErrorActionPreference = 'Stop'
 $repo = $PSScriptRoot
 $dest = Join-Path $HOME '.claude'
 $skillsDest = Join-Path $dest 'skills'
+$ts = Get-Date -Format yyyyMMddHHmmss
 New-Item -ItemType Directory -Force $skillsDest | Out-Null
 
-Get-ChildItem (Join-Path $repo 'skills') -Directory | ForEach-Object {
-    $target = Join-Path $skillsDest $_.Name
+# own skills first, then vendor/<source>/<skill>
+$dirs = @(Get-ChildItem (Join-Path $repo 'skills') -Directory)
+$dirs += Get-ChildItem (Join-Path $repo 'vendor') -Directory | ForEach-Object { Get-ChildItem $_.FullName -Directory }
+foreach ($d in $dirs) {
+    $target = Join-Path $skillsDest $d.Name
     if (Test-Path $target) {
-        $bak = "$target.bak-$(Get-Date -Format yyyyMMddHHmmss)"
-        Move-Item $target $bak
-        Write-Host "backup: $bak"
+        Move-Item $target "$target.bak-$ts"
+        Write-Host "backup: $target.bak-$ts"
     }
-    Copy-Item $_.FullName $target -Recurse
-    Write-Host "installed skill: $($_.Name)"
+    Copy-Item $d.FullName $target -Recurse
+    Write-Host "installed skill: $($d.Name)"
 }
 
 $claudeMd = Join-Path $dest 'CLAUDE.md'
 if (Test-Path $claudeMd) {
-    Copy-Item $claudeMd "$claudeMd.bak-$(Get-Date -Format yyyyMMddHHmmss)"
+    Copy-Item $claudeMd "$claudeMd.bak-$ts"
     Write-Host "backup: existing CLAUDE.md"
 }
 Copy-Item (Join-Path $repo 'global\CLAUDE.md') $claudeMd
